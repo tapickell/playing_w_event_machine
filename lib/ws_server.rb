@@ -1,4 +1,5 @@
 require 'em-websocket'
+require 'json'
 
 EM.run {
   puts 'starting server'
@@ -23,7 +24,11 @@ EM.run {
   end
 
   def handle_message(msg)
-    msg
+    @hashey = JSON.parse(msg)
+    return "HASH: #{@hashey}" if false
+    return 'new it up' if @hashey.has_key? 'new'
+    return 'passing the message' if @hashey.has_key? 'message'
+    'hash didn\'t have any known keys'
   end
 }
 
