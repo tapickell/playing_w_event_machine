@@ -18,8 +18,12 @@ EM.run {
 
   ws.onmessage { |msg|
     puts "Recieved: #{msg}"
-    handle_message(msg)
-    ws.send "Recieved: #{msg}"
+    ws.send handle_message(msg)
   }
   end
+
+  def handle_message(msg)
+    msg
+  end
 }
+
