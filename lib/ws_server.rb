@@ -11,15 +11,15 @@ EM.run {
 
     # Publish message to the client
     ws.send "Hello Client, you connected to #{handshake.path}"
-    ws.send "Handshake info: #{handshake.inspect}."
     ws.send "Query: #{handshake.query_string}"
   }
 
   ws.onclose { puts "Connection closed" }
 
   ws.onmessage { |msg|
-    puts "Recieved message: #{msg}"
-    ws.send "Pong: #{msg}"
+    puts "Recieved: #{msg}"
+    handle_message(msg)
+    ws.send "Recieved: #{msg}"
   }
   end
 }
