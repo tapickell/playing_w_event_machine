@@ -38,9 +38,9 @@ EM.run {
   end
 
   def pass_the_message(hashey)
+    message = hashey['message'].to_sym
     if @number
-      @number.send(hashey['message'].to_sym)
-      'the message has been passed'
+      @number.respond_to?(message) ? @number.send(message) : 'the object doesn\'t respond to that message'
     else
       'the object isn\'t in existance yet'
     end
