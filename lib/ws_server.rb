@@ -1,5 +1,6 @@
 require 'em-websocket'
 require 'json'
+require_relative 'converter'
 
 EM.run {
   puts 'starting server'
@@ -26,9 +27,23 @@ EM.run {
   def handle_message(msg)
     @hashey = JSON.parse(msg)
     return "HASH: #{@hashey}" if false
-    return 'new it up' if @hashey.has_key? 'new'
-    return 'passing the message' if @hashey.has_key? 'message'
+    return new_it_up(@hashey) if @hashey.has_key? 'new'
+    return pass_the_message(@hashey) if @hashey.has_key? 'message'
     'hash didn\'t have any known keys'
+  end
+
+  def new_it_up(hashey)
+    @number = Number.new(hashey['new'].to_i)
+    'a number has been newed up for your conversion'
+  end
+
+  def pass_the_message(hashey)
+    if @number
+      @number.send(hashey['message'].to_sym)
+      'the message has been passed'
+    else
+      'the object isn\'t in existance yet'
+    end
   end
 }
 
