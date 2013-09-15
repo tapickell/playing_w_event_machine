@@ -34,14 +34,14 @@ class Number
   end
 
   def number_is_hex?
-    @number.each_char do |c|
-      return true if @numbers.values.includes? c
+    @number.to_s.each_char do |c|
+      return true if @numbers.values.include? c
     end
     false
   end
 
   def number_is_binary?
-    @number.each_char do |c|
+    @number.to_s.each_char do |c|
       return false unless (c == '1' || c == '0')
     end
     true
