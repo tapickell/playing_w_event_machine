@@ -4,7 +4,7 @@ require_relative 'converter'
 
 EM.run {
   puts 'starting server'
-  EM::WebSocket.run(:host => "0.0.0.0", :port => 8080) do |ws|
+  EM::WebSocket.run(:host => "0.0.0.0", :port => 1337) do |ws|
   ws.onopen { |handshake|
     puts "WebSocket connection open"
 

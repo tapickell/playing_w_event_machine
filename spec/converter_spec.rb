@@ -24,30 +24,30 @@ describe Number do
   it "takes an integer then can return a binary number string" do
     @number = Number.new(TEST_DECIMAL)
     @number.type.should == "decimal"
-    @number.to_binary.should == "1111000011110000"
+    @number.to_binary.should == "101010"
   end
 
   it "takes an integer then can return a hexadecimal number string" do
     @number = Number.new(TEST_DECIMAL)
     @number.type.should == "decimal"
-    @number.to_hexadecimal.should == "F0F0"
+    @number.to_hexadecimal.should == "2a"
   end
 
   it "takes an integer then can return a hexadecimal number string for other values" do
     @number1 = Number.new(TEST_FIFTEEN)
     @number1.type.should == "decimal"
-    @number1.to_hexadecimal.should == "F"
+    @number1.to_hexadecimal.should == "f"
     @number2 = Number.new(TEST_TWENTY_TWO)
     @number2.type.should == "decimal"
     @number2.to_hexadecimal.should == "16"
     @number3 = Number.new(TEST_TEN)
     @number3.type.should == "decimal"
-    @number3.to_hexadecimal.should == "A"
+    @number3.to_hexadecimal.should == "a"
   end
 
   it "takes a negative integer then can return a hexadecimal number string" do
     @number = Number.new(TEST_NEGATIVE)
     @number.type.should == "decimal"
-    @number.to_hexadecimal.should == "A"
+    @number.to_hexadecimal.should == "-f"
   end
 end
