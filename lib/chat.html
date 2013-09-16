@@ -1,8 +1,11 @@
 <html>
   <head>
+    <script src="http://yui.yahooapis.com/3.12.0/build/yui/yui-min.js"></script>
     <script src='chat_client.js'></script>
   </head>
-  <body onload="init();">
+  <body class="yui3-skin-sam" onload="init();">
+    <br>
+    <button class='yui3-button' id="connected_button" disabled></button>
     <br>
     <label>Conversation:</label>
     <div id="messages"></div>
