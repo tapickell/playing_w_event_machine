@@ -7,23 +7,23 @@ require_relative 'converter'
 EM.run {
   puts 'starting server'
   EM::WebSocket.run(:host => "0.0.0.0", :port => 1337) do |ws|
-  ws.onopen { |handshake|
-    @sockets << ws
-    puts "WebSocket connection open"
-  }
+    ws.onopen { |handshake|
+      @sockets << ws
+      puts "WebSocket connection open"
+    }
 
-  ws.onclose {
-    puts "Connection closed"
-    @sockets.delete ws
-  }
+    ws.onclose {
+      puts "Connection closed"
+      @sockets.delete ws
+    }
 
-  ws.onmessage { |msg|
-    puts "Recieved: #{msg}"
-    response = handle_message(msg)
-    @sockets.each do |ws|
-      ws.send response
-    end
-  }
+    ws.onmessage { |msg|
+      puts "Recieved: #{msg}"
+      response = handle_message(msg)
+      @sockets.each do |ws|
+        ws.send response
+      end
+    }
   end
 
   def handle_message(msg)
@@ -36,7 +36,8 @@ EM.run {
   end
 
   def chat(hashey)
-    hashey['chat']
+    msg_hash = hashey['chat']
+    "#{msg_hash['username']}: #{msg_hash['message']}"
   end
 
   def new_it_up(hashey)
