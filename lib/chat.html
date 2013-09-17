@@ -1,16 +1,24 @@
 <html>
   <head>
-    <script src="http://yui.yahooapis.com/3.12.0/build/yui/yui-min.js"></script>
+    <link rel="stylesheet" href="nanoscroller.css">
+    <link rel="stylesheet" href="chat.css">
+    <script src='jquery-1.10.2.min.js'></script>
+    <script src='jquery.nanoscroller.min.js'></script>
     <script src='chat_client.js'></script>
   </head>
-  <body class="yui3-skin-sam" onload="init();">
-    <br>
-    <button class='yui3-button' id="connected_button" disabled></button>
-    <br>
-    <label>Conversation:</label>
-    <div id="messages"></div>
-    <label>Message:</label>
-    <input id='message' size='20' placeholder='message'>
-    <button id='send_button' disabled>Send</button>
+  <body onload="init();" >
+    <div class="body">
+      <div id="side_bar">
+        <p id="connected_button"></label>
+      </div>
+      <div class="main">
+        <div id="scrollable" class="nano">
+          <div class="content" id="scroll_list">
+          </div>
+        </div>
+        <input id='message' size='35' placeholder='Message'>
+        <button id='send_button' disabled>Send</button>
+      </div>
+    </div>
   </body>
 </html>

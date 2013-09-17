@@ -1,0 +1,44 @@
+.body {
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	background-color: #363942;
+	width: 450px;
+	height: 520px;
+	padding-left: 20px;
+	padding-top: 20px;
+}
+
+.main {
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	background-color: #D8CAA8;
+	height: 425px;
+	width: 270px;
+}
+
+.nano {
+	padding: 5px;
+}
+
+#connected_button {
+	margin-left: 45px;
+	margin-top: 10px;
+}
+
+#message {
+	margin-left: 10px;
+}
+
+#side_bar {
+	float: right;
+	width: 150px;
+	height: 350px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	background-color: #D8CAA8;
+	padding-right: 10px;
+	margin-right: 10px;
+}
