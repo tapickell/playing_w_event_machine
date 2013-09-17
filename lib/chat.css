@@ -20,10 +20,15 @@
 
 .nano {
 	padding: 5px;
+	height: 93%;
+}
+
+p {
+	padding-left: 10px;
 }
 
 #connected_button {
-	margin-left: 45px;
+	margin-left: 35px;
 	margin-top: 10px;
 }
 
@@ -41,4 +46,11 @@
 	background-color: #D8CAA8;
 	padding-right: 10px;
 	margin-right: 10px;
+}
+
+#title {
+	margin-left: 100px;
+	padding-top: 10px;
+	-webkit-margin-before: 0em;
+	-webkit-margin-after: 0em;
 }

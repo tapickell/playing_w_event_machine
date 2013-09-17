@@ -12,12 +12,14 @@ EM.run {
       @sockets << ws
       @users[ws.object_id] = handshake.query_string
       puts "WebSocket connection open"
+      update_user_list
     }
 
     ws.onclose {
       puts "Connection closed"
       @sockets.delete ws
       @users.delete ws
+      update_user_list
     }
 
     ws.onmessage { |msg|
@@ -39,7 +41,12 @@ EM.run {
   end
 
   def chat(usr, hashey)
+    #pass json instead with intention
     "#{usr}: #{hashey['chat']}"
+  end
+
+  def update_user_list
+
   end
 
   def new_it_up(hashey)
