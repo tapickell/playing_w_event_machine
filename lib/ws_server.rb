@@ -10,7 +10,7 @@ EM.run {
   EM::WebSocket.run(:host => "0.0.0.0", :port => 1337) do |ws|
     ws.onopen { |handshake|
       @sockets << ws
-      @users[ws.object_id] = handshake.query_string
+      @users[handshake.query_string] = ws.object_id
       puts "WebSocket connection open"
       update_user_list
     }
@@ -18,35 +18,28 @@ EM.run {
     ws.onclose {
       puts "Connection closed"
       @sockets.delete ws
-      @users.delete ws
+      @users.delete(@users.key(ws.object_id))
       update_user_list
     }
 
     ws.onmessage { |msg|
       puts "Recieved: #{msg}"
-      response = handle_message(@users[ws.object_id], msg)
-      @sockets.each do |ws|
-        ws.send response
-      end
+      response = handle_message(@users.key(ws.object_id), msg)
+      @sockets.each { |ws| ws.send response }
     }
   end
 
   def handle_message(usr, msg)
-    @hashey = JSON.parse(msg)
-    return "HASH: #{@hashey}" if false
-    return chat(usr, @hashey) if @hashey.has_key? 'chat'
-    return new_it_up(@hashey) if @hashey.has_key? 'new'
-    return pass_the_message(@hashey) if @hashey.has_key? 'message'
+    return chat(usr, JSON.parse(msg)) if @hashey.has_key? 'chat'
     'hash didn\'t have any known keys'
   end
 
   def chat(usr, hashey)
-    #pass json instead with intention
-    "#{usr}: #{hashey['chat']}"
+    "{ \"message\" : \"#{usr}: #{hashey['chat']}\" }"
   end
 
   def update_user_list
-
+    @sockets.each { |ws| ws.send "{ \"list_update\" : #{@users.keys} }" }
   end
 
   def new_it_up(hashey)
