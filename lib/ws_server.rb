@@ -10,9 +10,14 @@ EM.run {
   EM::WebSocket.run(:host => "0.0.0.0", :port => 1337) do |ws|
     ws.onopen { |handshake|
       @sockets << ws
-      @users[handshake.query_string] = ws.object_id
-      puts "WebSocket connection open"
-      update_user_list
+      if (!@users.member?(handshake.query_string))
+        @users[handshake.query_string] = ws.object_id
+        puts "WebSocket connection open"
+        update_user_list
+      else
+        ws.send "{ \"error\" : \"Username Already in Use!\" }"
+        ws.close_connection_after_writing
+      end
     }
 
     ws.onclose {
@@ -30,7 +35,8 @@ EM.run {
   end
 
   def handle_message(usr, msg)
-    return chat(usr, JSON.parse(msg)) if @hashey.has_key? 'chat'
+    hsh = JSON.parse(msg)
+    return chat(usr, hsh) if hsh.has_key? 'chat'
     'hash didn\'t have any known keys'
   end
 
